@@ -1,0 +1,30 @@
+/* 
+
+
+
+
+
+ */
+
+body {
+	padding: 3rem;
+}
+
+td {
+	font-family: 'Roboto', sans-serif;
+	height: 50px;
+	width: 50px;
+	text-align: center;
+	border: 1px black solid;
+	padding: 3px;
+	background-color: rgba(82, 82, 82, 0.637);
+}
+
+td:hover {
+	color: rgba(250, 42, 42, 0.76);
+	background-color: rgba(248, 126, 126, 0.76);
+}
+
+form {
+	margin-top: 15px;
+}
