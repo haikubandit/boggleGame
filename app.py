@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template, redirect, flash, session
+from flask import Flask, request, render_template, redirect, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
+import pdb
 
 from boggle import Boggle
 
@@ -27,8 +28,19 @@ def guess_page():
     board = session["board"]
     guess = request.args["guess"]
     response = {"guess": boggle_game.check_valid_word(board,guess)}
-    raise
     
     print(board, flush=True)
     print(guess, flush=True)
+    print(response, flush=True)
     return jsonify(response)
+
+
+@app.route("/gameover")
+def gameover_page():
+    """Gameover stats."""
+    board = session["board"]
+    data = request.json
+    pdb.set_trace()
+    print(board, flush=True)
+    print(data, flush=True)
+    return jsonify(data)

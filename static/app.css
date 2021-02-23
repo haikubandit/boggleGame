@@ -12,12 +12,14 @@ body {
 
 td {
 	font-family: 'Roboto', sans-serif;
+	font-size: 2rem;
 	height: 50px;
 	width: 50px;
 	text-align: center;
 	border: 1px black solid;
 	padding: 3px;
 	background-color: rgba(82, 82, 82, 0.637);
+	border-radius: 7px;
 }
 
 td:hover {
@@ -27,4 +29,12 @@ td:hover {
 
 form {
 	margin-top: 15px;
+}
+
+.valid {
+	color: green;
+}
+
+.invalid {
+	color: red;
 }
