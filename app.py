@@ -21,11 +21,14 @@ def home_page():
     print(session["board"], flush=True)
     return render_template("gameboard.html", board=board)
 
-# @app.route("/guess", methods=["POST"])
-# def guess_page():
-#     """Refresh home page when checking for guess."""
-#     board = session["board"]
-#     guess = request.form["guess"]
+@app.route("/guess")
+def guess_page():
+    """Refresh home page when checking for guess."""
+    board = session["board"]
+    guess = request.args["guess"]
+    response = {"guess": boggle_game.check_valid_word(board,guess)}
+    raise
     
-#     print(session["board"], flush=True)
-#     return render_template("gameboard.html", board=board)
+    print(board, flush=True)
+    print(guess, flush=True)
+    return jsonify(response)
