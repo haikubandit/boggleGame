@@ -11,33 +11,28 @@ let totalScore = 0;
 
 setTimeout(async function() {
 	$('button').prop('disabled', true);
-	// response = await axios.get(`http://127.0.0.1:5000/gameover`, {
-	// 	data: {
-	// 		playerScore: totalScore
-	// 	}
-	// });
-}, 3000);
+	response = await axios.post(`http://127.0.0.1:5000/gameover`, { playerScore: totalScore });
+}, 10000);
 
 $('form').submit(async function getGuess(evt) {
 	evt.preventDefault();
-	const submit = $(this);
-	submit.attr('disabled', 'disabled');
 
-	$guess = $("input[name='guess']").val();
+	$guessInput = $("input[name='guess']").val();
 	response = await axios.get(`http://127.0.0.1:5000/guess`, {
 		params: {
-			guess: $guess
+			word: $guessInput
 		}
 	});
-	generateResponse(response.data['guess']);
+
+	generateHTMLResponse(response.data['guess']);
 	$('form').trigger('reset');
 
 	console.log(response);
 	console.log(response.data['guess']);
-	console.log($guess);
+	console.log($guessInput);
 });
 
-const generateResponse = response => {
+const generateHTMLResponse = response => {
 	//remove response if one exists
 	$('.response').children('p').remove();
 
@@ -50,7 +45,7 @@ const generateResponse = response => {
 		answer.classList.add('valid');
 
 		//add to score if valid
-		calculateScore($guess);
+		calculateScore($guessInput);
 	} else if (response === 'not-word') {
 		answer.innerHTML = 'That is not a valid word.';
 		answer.classList.add('invalid');

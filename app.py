@@ -26,7 +26,7 @@ def home_page():
 def guess_page():
     """Refresh home page when checking for guess."""
     board = session["board"]
-    guess = request.args["guess"]
+    guess = request.args["word"]
     response = {"guess": boggle_game.check_valid_word(board,guess)}
     
     print(board, flush=True)
@@ -35,12 +35,12 @@ def guess_page():
     return jsonify(response)
 
 
-@app.route("/gameover")
+@app.route("/gameover", methods=["POST"])
 def gameover_page():
     """Gameover stats."""
-    board = session["board"]
+    
     data = request.json
-    pdb.set_trace()
-    print(board, flush=True)
+    session['play_count'] = session.get('play_count', 0) + 1
+
     print(data, flush=True)
     return jsonify(data)

@@ -3,10 +3,10 @@
 
 {% block content %}
     <table id="board">
-        {% for y in board %}
+        {% for row in board %}
             <tr>
-            {% for x in y %}
-                <td class="cell">{{x}}</td>
+            {% for cell in row %}
+                <td class="cell">{{cell}}</td>
             {% endfor %}
             </tr>
         {% endfor %}
