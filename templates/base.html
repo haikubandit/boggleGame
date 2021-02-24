@@ -11,20 +11,34 @@
 </head>
 <body>
     <h1>Boggle Game</h1>
-    <main id="gameboard">
+    <main id="game">
         {% block content %} {% endblock %}
-    </main>
-    <section id="guess">
-        <form action="/guess" method="post">
-            <input type="text" name="guess">
+        <p>High Score: 
+            <b>{{ highscore }}</b> 
+            in {{ play_count }} plays
+          </p>
+        <p>
+            Your score:<b class="score">0</b>
+            Seconds Left: <b class="timer"></b>
+        </p>
+        <form method="POST" class="add-word">
+            <input type="text" name="guess" class="word" autofocus>
             <button type="submit">Submit Guess</button>
         </form>
         <div class="response"></div>
-        <div class="score">
+
+        <p class="msg">
+          <!-- our JS will put messages here dynamically -->
+        </p>
+    
+        <ul class="words">
+          <!-- our JS will words here as they score -->   
+        </ul>
+    </main>
+        <!-- <div class="score">
             <h3 class="current-score">Current score: 0</h3>
             <h3 class="total-score">Total score: 0</h3>
-        </div>
-    </section>
+        </div> -->
 
 
     <script src="http://unpkg.com/jquery"></script>

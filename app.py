@@ -19,15 +19,20 @@ def home_page():
 
     board = boggle_game.make_board()
     session["board"] = board
+    highscore = session.get("highscore", 0)
+    play_count = session.get('play_count', 0)
+
     print(session["board"], flush=True)
-    return render_template("gameboard.html", board=board)
+    return render_template("gameboard.html", board=board,
+                            highscore=highscore,
+                            play_count=play_count)
 
 @app.route("/guess")
 def guess_page():
     """Refresh home page when checking for guess."""
     board = session["board"]
     guess = request.args["word"]
-    response = {"guess": boggle_game.check_valid_word(board,guess)}
+    response = {"result": boggle_game.check_valid_word(board,guess)}
     
     print(board, flush=True)
     print(guess, flush=True)
@@ -39,8 +44,14 @@ def guess_page():
 def gameover_page():
     """Gameover stats."""
     
-    data = request.json
-    session['play_count'] = session.get('play_count', 0) + 1
+    score = request.json["score"]
+    highscore = session.get("highscore", 0)
+    play_count = session.get('play_count', 0)
 
-    print(data, flush=True)
-    return jsonify(data)
+    session['play_count'] = play_count + 1
+    session['highscore'] = max(score, highscore)
+
+    print(score, flush=True)
+    print(highscore, flush=True)
+
+    return jsonify(newHighScore=score > highscore)

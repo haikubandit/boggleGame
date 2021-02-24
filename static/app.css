@@ -31,10 +31,16 @@ form {
 	margin-top: 15px;
 }
 
-.valid {
-	color: green;
+.msg {
+	padding: 1em;
 }
 
-.invalid {
-	color: red;
+.msg.ok {
+	color: white;
+	background-color: green;
+}
+
+.msg.err {
+	color: white;
+	background-color: tomato;
 }
